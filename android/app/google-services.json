@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "813815578962",
+    "project_id": "egy-tour-6f55f",
+    "storage_bucket": "egy-tour-6f55f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813815578962:android:216e6c0849653feeceba8b",
+        "android_client_info": {
+          "package_name": "com.example.egy_tour"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYdZk6yBcsg4T7BcKrfoiNSXu9mFH0iD0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
