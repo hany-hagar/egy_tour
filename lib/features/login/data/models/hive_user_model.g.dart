@@ -19,11 +19,6 @@ class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
       phone: reader.readString(),
       email: reader.readString(),
       password: reader.readString(),
-      country: reader.readString(),
-      city: reader.readString(),
-      bio: reader.readString(),
-      cover: reader.readString(),
-      photos: reader.readList().cast<String>(),
       nationality: reader.readString(),
       birthday: reader.readString(),
       favouritesTourisms: reader.readList().cast<TourismModel>(),
@@ -45,11 +40,6 @@ class HiveUserModelAdapter extends TypeAdapter<HiveUserModel> {
     writer.writeString(obj.phone);
     writer.writeString(obj.email);
     writer.writeString(obj.password);
-    writer.writeString(obj.country);
-    writer.writeString(obj.city);
-    writer.writeString(obj.bio);
-    writer.writeString(obj.cover);
-    writer.writeList(obj.photos);
     writer.writeString(obj.nationality);
     writer.writeString(obj.birthday);
     writer.writeList(obj.favouritesTourisms);

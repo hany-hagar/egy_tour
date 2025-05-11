@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 // ignore: depend_on_referenced_packages
 import 'package:hive/hive.dart';
 import 'package:egy_tour/const/api_end_points.dart';
-import 'package:egy_tour/features/splash/presentation/manager/splash_view_cubit/splash_cubit.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/utils/hive_services.dart';
 import '../models/firebase_user_model.dart';
@@ -48,29 +47,8 @@ class LoginRepoImpl extends LoginRepo {
       }
 
       HiveUserModel model = _mapUserData(userDoc.data()!, user.uid, password);
-
-      // Check if user's city matches SplashCubit
-      if (SplashCubit.standard.city.city == model.city) {
-        return Right(model);
-      }
-
-      // Update user location
-      try {
-        FirebaseUserModel updatedData = FirebaseUserModel.fromJson(model.toJson());
-        updatedData.country = SplashCubit.standard.city.country;
-        updatedData.city = SplashCubit.standard.city.city;
-
-        await FirebaseFirestore.instance
-            .collection(userCollection)
-            .doc(user.uid)
-            .update(updatedData.toJson());
-
-        // Return updated user data
-        var update = _mapUserData(updatedData.toJson(), user.uid, password);
-        return Right(update);
-      } catch (updateError) {
-        return Left(FirebaseFailure(updateError.toString()));
-      }
+      return Right(model);
+      
     } catch (onError) {
       if (onError is FirebaseAuthException) {
         return Left(FirebaseFailure.fromFirebaseException(onError));

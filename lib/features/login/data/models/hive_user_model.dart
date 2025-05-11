@@ -25,35 +25,25 @@ class HiveUserModel extends HiveObject {
   @HiveField(5)
   String password;
   @HiveField(6)
-  final String country;
-  @HiveField(7)
-  final String city;
-  @HiveField(8)
-  final String bio;
-  @HiveField(9)
-  final String cover;
-  @HiveField(10)
-  final List<String> photos;
-  @HiveField(11)
   final String nationality;
-  @HiveField(12)
+  @HiveField(7)
   final String birthday;
 
-  @HiveField(13)
+  @HiveField(8)
   List<TourismModel> favouritesTourisms;
-  @HiveField(14)
+  @HiveField(9)
   List<TourModel> favouriteTours;
-  @HiveField(15)
+  @HiveField(10)
   List<HotelModel> favouriteHotels;
-  @HiveField(16)
+  @HiveField(11)
   List<CarModel> favouriteCars;
-  @HiveField(17)
+  @HiveField(12)
   List<HiveTourismModel> freviewTourisms;
-  @HiveField(18)
+  @HiveField(13)
   List<HiveTourModel> reviewTours;
-  @HiveField(19)
+  @HiveField(14)
   List<HiveHotelModel> reviewHotels;
-  @HiveField(20)
+  @HiveField(15)
   List<HiveCarModel> reviewCars;
 
   HiveUserModel({
@@ -63,11 +53,6 @@ class HiveUserModel extends HiveObject {
     required this.phone,
     required this.email,
     required this.password,
-    required this.country,
-    required this.city,
-    required this.bio,
-    required this.cover,
-    required this.photos,
     required this.nationality,
     required this.birthday,
     required this.favouritesTourisms,
@@ -88,11 +73,6 @@ class HiveUserModel extends HiveObject {
       phone: json['phone'] ?? '',
       email: json['email'] ?? '',
       password: password,
-      country: json['country'] ?? '',
-      city: json['city'] ?? '',
-      bio: json['bio'] ?? '',
-      cover: json['cover'] ?? '',
-      photos: List<String>.from(json['photos'] ?? []),
       nationality: json['nationality'] ?? '',
       birthday: json['birthday'] ?? '',
       favouritesTourisms: (json['favouritesTourisms'] as List<dynamic>?)
@@ -130,11 +110,6 @@ class HiveUserModel extends HiveObject {
       'phone': phone,
       'email': email,
       'password': password,
-      'country': country,
-      'city': city,
-      'bio': bio,
-      'cover': cover,
-      'photos': photos,
       'nationality': nationality,
       'birthday': birthday,
       'favouritesTourisms': favouritesTourisms.map((e) => e.toJson()).toList(),

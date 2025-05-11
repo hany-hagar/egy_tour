@@ -76,32 +76,7 @@ class AppCubit extends Cubit<AppState> {
   }
   
   
-  Future<void> addImage() async {
-    try {
-      XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image != null) {
-        emit(SetImageLoading());
-        final File file = File(image.path);
-        final String path = '${userInfo.id}/${userInfo.photos.length}';
-        var url = await SupabaseServices().uploadImage(
-          fileName: path,
-          profImage: file,
-          bucketName: photoCollection,
-        );
-        var model = FirebaseUserModel.fromJson(userInfo.toJson());
-        userInfo.photos.add(url);
-        model.photos.add(url);
-        await updateData(
-          model: model,
-          successState: SetImageSuccess(),
-          failureState: (error) => SetImageFailure(error: error),
-          id: userInfo.id,
-        );
-      }
-    } catch (e) {
-      emit(SetImageFailure(error: e.toString()));
-    }
-  }
+  
   File profImage = File("");
   late String profImageUrl = userInfo.image;
   Future<void> setProfImage() async {
@@ -116,16 +91,8 @@ class AppCubit extends Cubit<AppState> {
           profImage: profImage,
           bucketName: userCollection,
         );
-        final String file = '${userInfo.id}/${userInfo.photos.length}';
-        var photoUrl = await SupabaseServices().uploadImage(
-          fileName: file,
-          profImage: profImage,
-          bucketName: photoCollection,
-        );
         var model = FirebaseUserModel.fromJson(userInfo.toJson());
         model.image = profImageUrl;
-        model.photos.add(photoUrl);
-        userInfo.photos.add(profImageUrl);
         await updateData(
           model: model,
           successState: SetProfileImageSuccess(),
@@ -151,16 +118,12 @@ class AppCubit extends Cubit<AppState> {
   late var email = TextEditingController(text: userInfo.email.toString());
   late var password = TextEditingController();
   late var newPassword = TextEditingController();
-  late var city = TextEditingController(text: userInfo.city.toString());
   late var birthday = TextEditingController(text: userInfo.birthday.toString());
   Future<void> updateDataOnPressed() async {
     final model = FirebaseUserModel.fromJson(userInfo.toJson());
     if (updateFormKey.currentState!.validate()) {
       model.name = userName.text;
-      model.bio = userName.text;
       model.phone = phone.text;
-      model.city = userName.text;
-      model.country = userName.text;
       model.birthday = birthday.text;
       emit(UpdateDataLoading());
       updateData(

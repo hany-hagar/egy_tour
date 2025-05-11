@@ -10,7 +10,6 @@ import 'package:egy_tour/features/login/data/models/firebase_user_model.dart';
 import 'package:egy_tour/features/login/data/models/hive_user_model.dart';
 import '../../../../const/api_end_points.dart';
 import '../../../../core/utils/hive_services.dart';
-import '../../../splash/data/models/location_model.dart';
 import '../../data/repo/login_repo.dart';
 part 'login_state.dart';
 
@@ -174,23 +173,13 @@ class LoginCubit extends Cubit<LoginState> {
           bucketName: userCollection,
           fileName: "${r.toString()}/image",
         );
-        var cover = await SupabaseServices().uploadAssetImage(
-          imagePath: "assets/images/cover.png",
-          bucketName: userCollection,
-          fileName: "${r.toString()}/cover",
-        );
         FirebaseUserModel model = FirebaseUserModel(
           birthday: birthday.text,
           nationality: nationality,
-          city: LocationModel.stander().city.city,
-          country: LocationModel.stander().city.country,
           email: email,
           name: userName,
           phone: phone,
           image: profile,
-          cover: cover,
-          bio: "🌟 Welcome to my world!",
-          photos: [],
           favouritesTourisms: [],
           favouriteTours: [],
           favouriteHotels: [],
